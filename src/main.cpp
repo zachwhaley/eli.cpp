@@ -1,26 +1,9 @@
-#include <fstream>
 #include <iostream>
-#include <string>
+
+#include "editor.hpp"
 
 using namespace std;
-
-string slurp(const string &filename)
-{
-    ifstream ifs{filename, ios::in | ios::binary | ios::ate};
-    if (ifs)
-    {
-        string str;
-
-        ifs.seekg(0, ios::end);
-        str.resize(ifs.tellg());
-        ifs.seekg(0, ios::beg);
-
-        ifs.read(&str.front(), str.size());
-
-        return str;
-    }
-    return "";
-}
+using namespace editor;
 
 int main(int argc, char *argv[])
 {
@@ -30,7 +13,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        cout << argv[0] << " [file]" << endl;
+        cout << argv[0] << " <file>" << endl;
     }
     return 0;
 }
