@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "buffer.hpp"
 #include "editor.hpp"
 
 using namespace std;
@@ -9,7 +10,12 @@ int main(int argc, char *argv[])
 {
     if (argc > 1)
     {
-        cout << slurp(argv[1]) << endl;
+        string name = argv[1];
+        string text = slurp(name);
+
+        Buffer buffer{name, text};
+
+        cout << buffer.text() << endl;
     }
     else
     {
