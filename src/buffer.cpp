@@ -11,7 +11,7 @@ namespace editor
     {
     }
 
-    const string & Buffer::text() const
+    const string& Buffer::text() const
     {
         return m_text;
     }

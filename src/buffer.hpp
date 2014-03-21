@@ -15,13 +15,13 @@ namespace editor
     public:
         Buffer(const Buffer &) = default;
         Buffer(Buffer &&) = default;
-        Buffer & operator=(const Buffer &) & = default;
-        Buffer & operator=(Buffer &&) & = default;
+        Buffer& operator=(const Buffer &) & = default;
+        Buffer& operator=(Buffer &&) & = default;
         virtual ~Buffer() {}
 
         Buffer(const std::string &name, const std::string &text);
 
-        const std::string & text() const;
+        const std::string& text() const;
     };
 
 } // namespace editor
