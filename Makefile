@@ -1,5 +1,6 @@
 CXX = g++
 CPPFLAGS = -g -Wall -std=c++11
+LIBS = -lncurses
 
 PROJECT = editor
 SDIR = src
@@ -13,7 +14,7 @@ DEPENDS = $(subst .o,.d,$(OBJECTS))
 all: $(PROJECT)
 
 $(PROJECT): $(OBJECTS)
-	$(CXX) $(OBJECTS) -o $(PROJECT)
+	$(CXX) $(OBJECTS) $(LIBS) -o $(PROJECT)
 
 %.o:%.cpp
 	$(CXX) $(CPPFLAGS) -MMD -c $< -o $@
