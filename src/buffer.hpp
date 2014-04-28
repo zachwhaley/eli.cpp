@@ -9,7 +9,6 @@ namespace editor
     class Buffer
     {
     private:
-        std::string m_name;
         std::string m_text;
 
     public:
@@ -25,7 +24,7 @@ namespace editor
         ~Buffer() = default;
 
         /* Constructor */
-        Buffer(const std::string &name, const std::string &text);
+        Buffer(const std::string &text);
 
         const std::string& text() const;
     };

@@ -1,7 +1,5 @@
 #include <iostream>
 
-#include <unistd.h>
-
 #include "editor.hpp"
 
 using namespace std;
@@ -11,8 +9,7 @@ int main(int argc, char *argv[])
 {
     if (argc > 1)
     {
-        Editor editor{argv[1]};
-        sleep(3);
+        start_editing(argv[1]);
     }
     else
     {
