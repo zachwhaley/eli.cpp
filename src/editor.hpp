@@ -14,13 +14,19 @@ namespace editor
     class Editor
     {
     public:
+        /* Copy Contructor */
         Editor(const Editor &) = default;
+        /* Move Contructor */
         Editor(Editor &&) = default;
-        Editor& operator=(const Editor &) & = default;
-        Editor& operator=(Editor &&) & = default;
-        virtual ~Editor();
+        /* Copy Assignment Operator */
+        Editor& operator=(const Editor &) = default;
+        /* Move Assignment Operator */
+        Editor& operator=(Editor &&) = default;
 
+        /* Constructor */
         Editor(const std::string &filename);
+        /* Destructor */
+        ~Editor();
 
     private:
         WINDOW *m_window;
