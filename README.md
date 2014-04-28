@@ -9,5 +9,5 @@ Libraries
 [ncurses](https://www.gnu.org/software/ncurses/ncurses.html)
 
 ```bash
-$ yum install ncurses-libs
+$ yum install ncurses ncurses-libs ncurses-static
 ```
