@@ -3,21 +3,25 @@ CPPFLAGS = -g -Wall -std=c++11
 LIBS = -lncurses
 
 PROJECT = editor
-SDIR = src
-ODIR = obj
-SOURCES = $(wildcard $(SDIR)/*.cpp)
-OBJECTS = $(subst .cpp,.o,$(SOURCES))
-DEPENDS = $(subst .o,.d,$(OBJECTS))
+SRCDIR = src
+OBJDIR = obj
+SOURCES = $(wildcard $(SRCDIR)/*.cpp)
+OBJECTS = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o ,$(SOURCES))
 
 .PHONY: all clean
 
 all: $(PROJECT)
 
+$(OBJECTS): | $(OBJDIR)
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
 $(PROJECT): $(OBJECTS)
 	$(CXX) $(OBJECTS) $(LIBS) -o $(PROJECT)
 
-%.o:%.cpp
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CXX) $(CPPFLAGS) -MMD -c $< -o $@
 
 clean:
-	rm -f $(OBJECTS) $(DEPENDS) $(PROJECT)
+	rm -f -r $(OBJDIR) $(PROJECT)
