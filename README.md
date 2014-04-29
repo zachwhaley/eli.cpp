@@ -15,7 +15,7 @@ $ yum install ncurses ncurses-libs ncurses-static
 What it Does
 ------------
 
-Displays a files content on the screen for 2 seconds, for the moment.
+Displays a files content on the screen until a key press.
 
 How to Use it
 ------------
