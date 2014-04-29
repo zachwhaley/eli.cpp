@@ -1,15 +1,10 @@
 #ifndef _WINDOW_HPP__
 #define _WINDOW_HPP__
 
-#include <string>
-
-#include <curses.h>
+#include <ncurses.h>
 
 namespace editor
 {
-
-    void display(int x, int y, const std::string &text);
-
     class Window
     {
     public:
@@ -23,7 +18,7 @@ namespace editor
         Window& operator=(Window &&) = default;
 
         /* Constructor */
-        Window();
+        Window(int height, int width, int start_y, int start_x);
         /* Destructor */
         ~Window();
 
