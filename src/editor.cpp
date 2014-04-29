@@ -1,7 +1,5 @@
 #include "editor.hpp"
 
-#include <unistd.h>
-
 #include "buffer.hpp"
 #include "window.hpp"
 
@@ -15,7 +13,7 @@ namespace editor
         Editor editor;
         Buffer buffer{filename};
         display(buffer.text());
-        sleep(2);
+        getch();
         return 0;
     }
 
