@@ -13,7 +13,19 @@ namespace editor
         Editor editor;
         Buffer buffer{filename};
         display(buffer.text());
-        getch();
+        int ch;
+        while (true)
+        {
+            ch = getch();
+            if (ch == KEY_F(12))
+            {
+                return 0;
+            }
+            else
+            {
+                addch(ch);
+            }
+        }
         return 0;
     }
 
@@ -27,6 +39,7 @@ namespace editor
     {
         initscr();
         cbreak();
+        noecho();
         keypad(stdscr, true);
     }
 
