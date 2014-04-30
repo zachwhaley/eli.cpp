@@ -19,7 +19,7 @@ namespace editor
 
     void display(const string &text, int y, int x)
     {
-        printw(text.c_str(), y, x);
+        mvprintw(y, x, text.c_str());
         refresh();
     }
 
