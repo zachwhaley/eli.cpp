@@ -9,7 +9,13 @@ Libraries
 [ncurses](https://www.gnu.org/software/ncurses/ncurses.html)
 
 ```bash
-$ yum install gcc-c++ ncurses ncurses-libs ncurses-static
+$ yum install ncurses ncurses-libs ncurses-static
+```
+
+[G++](http://gcc.gnu.org/)
+
+```bash
+$ yum install gcc-c++
 ```
 
 What it Does
