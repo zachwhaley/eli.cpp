@@ -28,20 +28,16 @@ namespace editor
                 switch(ch)
                 {
                 case KEY_UP:
-                    cur_y--;
-                    move(cur_y, cur_x);
+                    move(--cur_y, cur_x);
                     break;
                 case KEY_DOWN:
-                    cur_y++;
-                    move(cur_y, cur_x);
+                    move(++cur_y, cur_x);
                     break;
                 case KEY_RIGHT:
-                    cur_x++;
-                    move(cur_y, cur_x);
+                    move(cur_y, ++cur_x);
                     break;
                 case KEY_LEFT:
-                    cur_x--;
-                    move(cur_y, cur_x);
+                    move(cur_y, --cur_x);
                     break;
                 default:
                     buffer.addChar(ch, cur_y, cur_x);
