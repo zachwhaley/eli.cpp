@@ -44,7 +44,9 @@ namespace editor
                     move(cur_y, cur_x);
                     break;
                 default:
-                    addch(ch);
+                    buffer.addChar(ch, cur_y, cur_x);
+                    display(buffer.text());
+                    move(cur_y, ++cur_x);
                     break;
                 }
             }

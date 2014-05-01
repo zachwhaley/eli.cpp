@@ -27,6 +27,8 @@ namespace editor
         Buffer(const std::string &text);
 
         const std::string& text() const;
+
+        void addChar(char ch, int y, int x);
     };
 
 } // namespace editor
