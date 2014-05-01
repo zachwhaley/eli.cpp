@@ -24,7 +24,7 @@ namespace editor
         ~Buffer() = default;
 
         /* Constructor */
-        Buffer(const std::string &text);
+        Buffer(const std::string &filename);
 
         const std::string& text() const;
 
