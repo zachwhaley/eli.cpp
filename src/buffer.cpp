@@ -11,8 +11,7 @@ namespace editor
     string slurp(const string &filename)
     {
         ifstream ifs{filename, ios::in | ios::binary | ios::ate};
-        if (ifs)
-        {
+        if (ifs) {
             string str;
 
             ifs.seekg(0, ios::end);
@@ -39,8 +38,7 @@ namespace editor
         auto iter = find_if(m_text.begin(), m_text.end(), [&](const char& value) {
                 return (value == '\n' && ++count == y);
             });
-        if (iter != m_text.end())
-        {
+        if (iter != m_text.end()) {
             // string::insert puts the input character before given position, so we need to increment the iter by one to
             // insert at the cursor,
             // then we increment the position again to the X coordinate of the cursor.

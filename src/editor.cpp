@@ -14,36 +14,32 @@ namespace editor
         Buffer buffer{filename};
         display(buffer.text());
         int ch;
-        while (true)
-        {
+        while (true) {
             ch = getch();
-            if (ch == KEY_F(12))
-            {
+            if (ch == KEY_F(12)) {
                 return 0;
             }
-            else
-            {
+            else {
                 int cur_y, cur_x;
                 getyx(stdscr, cur_y, cur_x);
-                switch(ch)
-                {
-                case KEY_UP:
-                    move(--cur_y, cur_x);
-                    break;
-                case KEY_DOWN:
-                    move(++cur_y, cur_x);
-                    break;
-                case KEY_RIGHT:
-                    move(cur_y, ++cur_x);
-                    break;
-                case KEY_LEFT:
-                    move(cur_y, --cur_x);
-                    break;
-                default:
-                    buffer.addChar(ch, cur_y, cur_x);
-                    display(buffer.text());
-                    move(cur_y, ++cur_x);
-                    break;
+                switch(ch) {
+                    case KEY_UP:
+                        move(--cur_y, cur_x);
+                        break;
+                    case KEY_DOWN:
+                        move(++cur_y, cur_x);
+                        break;
+                    case KEY_RIGHT:
+                        move(cur_y, ++cur_x);
+                        break;
+                    case KEY_LEFT:
+                        move(cur_y, --cur_x);
+                        break;
+                    default:
+                        buffer.addChar(ch, cur_y, cur_x);
+                        display(buffer.text());
+                        move(cur_y, ++cur_x);
+                        break;
                 }
             }
         }

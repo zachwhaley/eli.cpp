@@ -7,12 +7,10 @@ using namespace editor;
 
 int main(int argc, char *argv[])
 {
-    if (argc > 1)
-    {
+    if (argc > 1) {
         start_editing(argv[1]);
     }
-    else
-    {
+    else {
         cout << argv[0] << " <file>" << endl;
     }
     return 0;

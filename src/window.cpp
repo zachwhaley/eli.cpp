@@ -8,8 +8,7 @@ namespace editor
     Window::Window(int height, int width, int start_y, int start_x)
     {
         m_window = newwin(height, width, start_y, start_x);
-        if (!m_window)
-        {
+        if (!m_window) {
             throw;
         }
         box(m_window, 0, 0);
