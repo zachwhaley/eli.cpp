@@ -5,9 +5,6 @@
 
 namespace editor
 {
-
-    int start_editing(const std::string &filename);
-
     class Editor
     {
     public:

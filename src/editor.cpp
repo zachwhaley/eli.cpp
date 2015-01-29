@@ -7,8 +7,22 @@ using namespace std;
 
 namespace editor
 {
+    static int start_editing(const string &filename);
 
-    int start_editing(const string &filename)
+    Editor::Editor()
+    {
+        initscr();
+        cbreak();
+        noecho();
+        keypad(stdscr, true);
+    }
+
+    Editor::~Editor()
+    {
+        endwin();
+    }
+
+    static int start_editing(const string &filename)
     {
         Editor editor;
         Buffer buffer{filename};
@@ -43,19 +57,6 @@ namespace editor
             }
         }
         return 0;
-    }
-
-    Editor::Editor()
-    {
-        initscr();
-        cbreak();
-        noecho();
-        keypad(stdscr, true);
-    }
-
-    Editor::~Editor()
-    {
-        endwin();
     }
 
 } // namespace editor
