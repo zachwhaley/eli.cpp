@@ -7,7 +7,6 @@ using namespace std;
 
 namespace editor
 {
-    static void display(const string &text, int y, int x);
 
     int start_editing(const string &filename)
     {
@@ -57,12 +56,6 @@ namespace editor
     Editor::~Editor()
     {
         endwin();
-    }
-
-    static void display(const string &text, int y, int x)
-    {
-        mvprintw(y, x, text.c_str());
-        refresh();
     }
 
 } // namespace editor

@@ -4,6 +4,11 @@ using namespace std;
 
 namespace editor
 {
+    void display(const string &text, int y, int x)
+    {
+        mvprintw(y, x, text.c_str());
+        refresh();
+    }
 
     Window::Window(int height, int width, int start_y, int start_x)
     {

@@ -1,10 +1,14 @@
 #ifndef _EDITOR_WINDOW_HPP_
 #define _EDITOR_WINDOW_HPP_
 
+#include <string>
+
 #include <ncurses.h>
 
 namespace editor
 {
+    void display(const std::string &text, int y=0, int x=0);
+
     class Window
     {
     public:
