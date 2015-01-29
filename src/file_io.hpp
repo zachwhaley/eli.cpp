@@ -5,7 +5,7 @@
 
 namespace editor
 {
-    string slurp(const std::string &filename);
+    std::string slurp(const std::string &filename);
 
 } // namespace editor
 
