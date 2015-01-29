@@ -7,12 +7,13 @@ using namespace std;
 
 namespace editor
 {
+    static void display(const string &text, int y, int x);
 
     int start_editing(const string &filename)
     {
         Editor editor;
         Buffer buffer{filename};
-        display(buffer.text());
+        display(buffer.text(), 0, 0);
         int ch;
         while (true) {
             ch = getch();
@@ -45,12 +46,6 @@ namespace editor
         return 0;
     }
 
-    void display(const string &text, int y, int x)
-    {
-        mvprintw(y, x, text.c_str());
-        refresh();
-    }
-
     Editor::Editor()
     {
         initscr();
@@ -62,6 +57,12 @@ namespace editor
     Editor::~Editor()
     {
         endwin();
+    }
+
+    static void display(const string &text, int y, int x)
+    {
+        mvprintw(y, x, text.c_str());
+        refresh();
     }
 
 } // namespace editor

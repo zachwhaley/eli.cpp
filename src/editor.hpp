@@ -8,8 +8,6 @@ namespace editor
 
     int start_editing(const std::string &filename);
 
-    void display(const std::string &text, int y=0, int x=0);
-
     class Editor
     {
     public:
