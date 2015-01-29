@@ -1,17 +1,13 @@
 # Binary file
 editor
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.d
+# Compiled Object directory
+/obj/
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
+# Vim
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
