@@ -6,7 +6,6 @@ using namespace std;
 
 namespace editor
 {
-
     string slurp(const string &filename)
     {
         ifstream ifs{filename, ios::in | ios::binary | ios::ate};
@@ -22,16 +21,6 @@ namespace editor
             return str;
         }
         throw;
-    }
-
-    Buffer::Buffer(const string &filename)
-    {
-        m_text = slurp(filename);
-    }
-
-    const string& Buffer::text() const
-    {
-        return m_text;
     }
 
 } // namespace editor
