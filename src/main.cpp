@@ -7,8 +7,9 @@ using namespace editor;
 
 int main(int argc, char *argv[])
 {
+    Editor editor;
     if (argc > 1) {
-        start_editing(argv[1]);
+        editor.open(argv[1]);
     }
     else {
         cout << argv[0] << " <file>" << endl;

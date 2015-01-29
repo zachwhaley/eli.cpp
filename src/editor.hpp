@@ -12,6 +12,9 @@ namespace editor
         Editor();
         /* Destructor */
         ~Editor();
+
+        /* Open the contents from filename to be edited */
+        void open(const std::string &filename);
     };
 
 } // namespace editor

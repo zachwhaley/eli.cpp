@@ -7,7 +7,7 @@ using namespace std;
 
 namespace editor
 {
-    static int start_editing(const string &filename);
+    static int start_editing();
 
     Editor::Editor()
     {
@@ -22,11 +22,15 @@ namespace editor
         endwin();
     }
 
-    static int start_editing(const string &filename)
+    void Editor::open(const string &filename)
     {
-        Editor editor;
-        Buffer buffer{filename};
-        display(buffer.text(), 0, 0);
+        string text = slurp(filename);
+        display(text);
+        start_editing();
+    }
+
+    static int start_editing()
+    {
         int ch;
         while (true) {
             ch = getch();
