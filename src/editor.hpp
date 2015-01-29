@@ -1,5 +1,5 @@
-#ifndef _EDITOR_HPP__
-#define _EDITOR_HPP__
+#ifndef _EDITOR_EDITOR_HPP_
+#define _EDITOR_EDITOR_HPP_
 
 #include <string>
 
@@ -30,4 +30,4 @@ namespace editor
 
 } // namespace editor
 
-#endif /* _EDITOR_HPP__ */
+#endif /* _EDITOR_EDITOR_HPP_ */

@@ -1,5 +1,5 @@
-#ifndef _WINDOW_HPP__
-#define _WINDOW_HPP__
+#ifndef _EDITOR_WINDOW_HPP_
+#define _EDITOR_WINDOW_HPP_
 
 #include <ncurses.h>
 
@@ -28,4 +28,4 @@ namespace editor
 
 } // namespace editor
 
-#endif /* _WINDOW_HPP__ */
+#endif /* _EDITOR_WINDOW_HPP_ */

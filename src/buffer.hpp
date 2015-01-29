@@ -1,5 +1,5 @@
-#ifndef _BUFFER_HPP__
-#define _BUFFER_HPP__
+#ifndef _EDITOR_BUFFER_HPP_
+#define _EDITOR_BUFFER_HPP_
 
 #include <string>
 
@@ -31,4 +31,4 @@ namespace editor
 
 } // namespace editor
 
-#endif /* _BUFFER_HPP__ */
+#endif /* _EDITOR_BUFFER_HPP_ */
