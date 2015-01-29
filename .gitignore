@@ -11,3 +11,7 @@ editor
 Session.vim
 .netrwhist
 *~
+
+# Tags
+.tags
+cscope.*
