@@ -11,15 +11,6 @@ namespace editor
     class Editor
     {
     public:
-        /* Copy Contructor */
-        Editor(const Editor &) = delete;
-        /* Move Contructor */
-        Editor(Editor &&) = default;
-        /* Copy Assignment Operator */
-        Editor& operator=(const Editor &) = delete;
-        /* Move Assignment Operator */
-        Editor& operator=(Editor &&) = default;
-
         /* Constructor */
         Editor();
         /* Destructor */
