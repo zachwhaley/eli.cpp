@@ -36,7 +36,8 @@ namespace editor
                         move(cur_y, --cur_x);
                         break;
                     default:
-                        addch(ch);
+                        insch(ch);
+                        move(cur_y, ++cur_x);
                         break;
                 }
             }
