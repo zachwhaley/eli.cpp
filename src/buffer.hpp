@@ -5,6 +5,7 @@
 
 namespace editor
 {
+    string slurp(const string &filename);
 
     class Buffer
     {
