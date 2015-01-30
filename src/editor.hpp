@@ -3,19 +3,19 @@
 
 #include <string>
 
-namespace editor
-{
-    class Editor
-    {
-    public:
-        /* Constructor */
-        Editor();
-        /* Destructor */
-        ~Editor();
+namespace editor {
 
-        /* Open the contents from filename to be edited */
-        void open(const std::string &filename);
-    };
+class Editor
+{
+public:
+    /* Constructor */
+    Editor();
+    /* Destructor */
+    ~Editor();
+
+    /* Open the contents from filename to be edited */
+    void open(const std::string &filename);
+};
 
 } // namespace editor
 

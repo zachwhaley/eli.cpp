@@ -5,21 +5,21 @@
 
 #include <ncurses.h>
 
-namespace editor
+namespace editor {
+
+void display(const std::string &text, int y=0, int x=0);
+
+class Window
 {
-    void display(const std::string &text, int y=0, int x=0);
+public:
+    /* Constructor */
+    Window(int height, int width, int start_y, int start_x);
+    /* Destructor */
+    ~Window();
 
-    class Window
-    {
-    public:
-        /* Constructor */
-        Window(int height, int width, int start_y, int start_x);
-        /* Destructor */
-        ~Window();
-
-    private:
-        WINDOW *m_window;
-    };
+private:
+    WINDOW *m_window;
+};
 
 } // namespace editor
 
