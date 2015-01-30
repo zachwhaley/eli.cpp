@@ -1,9 +1,9 @@
-#ifndef _EDITOR_EDITOR_HPP_
-#define _EDITOR_EDITOR_HPP_
+#ifndef _ELI_EDITOR_HPP_
+#define _ELI_EDITOR_HPP_
 
 #include <string>
 
-namespace editor {
+namespace eli {
 
 class Editor
 {
@@ -17,6 +17,6 @@ public:
     void open(const std::string &filename);
 };
 
-} // namespace editor
+} // namespace eli
 
-#endif /* _EDITOR_EDITOR_HPP_ */
+#endif /* _ELI_EDITOR_HPP_ */

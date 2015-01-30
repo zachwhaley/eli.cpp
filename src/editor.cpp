@@ -5,7 +5,7 @@
 
 using namespace std;
 
-namespace editor {
+namespace eli {
 
 static int start_editing();
 
@@ -63,4 +63,4 @@ static int start_editing()
     return 0;
 }
 
-} // namespace editor
+} // namespace eli

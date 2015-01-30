@@ -1,4 +1,4 @@
-editor
+eli (short for Ellie)
 ======
 
 A bare bones text editor written in C++
@@ -25,12 +25,12 @@ Displays a files content on the screen.
 
 Move around with the arrow keys.
 
-Type some things, and watch them appear (possibly in the wrong place).
+Type some things, and watch them appear.
 
 How to Use it
 ------------
 
 ```bash
 $ make
-$ ./editor somefile
+$ ./eli somefile
 ```

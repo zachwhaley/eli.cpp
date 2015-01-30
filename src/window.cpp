@@ -2,7 +2,7 @@
 
 using namespace std;
 
-namespace editor {
+namespace eli {
 
 void display(const string &text, int y, int x)
 {
@@ -38,4 +38,4 @@ Window::~Window()
     delwin(m_window);
 }
 
-} // namespace editor
+} // namespace eli

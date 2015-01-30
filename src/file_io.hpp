@@ -1,12 +1,12 @@
-#ifndef _EDITOR_FILE_IO_HPP_
-#define _EDITOR_FILE_IO_HPP_
+#ifndef _ELI_FILE_IO_HPP_
+#define _ELI_FILE_IO_HPP_
 
 #include <string>
 
-namespace editor {
+namespace eli {
 
 std::string slurp(const std::string &filename);
 
-} // namespace editor
+} // namespace eli
 
-#endif /* _EDITOR_FILE_IO_HPP_ */
+#endif /* _ELI_FILE_IO_HPP_ */

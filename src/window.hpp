@@ -1,11 +1,11 @@
-#ifndef _EDITOR_WINDOW_HPP_
-#define _EDITOR_WINDOW_HPP_
+#ifndef _ELI_WINDOW_HPP_
+#define _ELI_WINDOW_HPP_
 
 #include <string>
 
 #include <ncurses.h>
 
-namespace editor {
+namespace eli {
 
 void display(const std::string &text, int y=0, int x=0);
 
@@ -21,6 +21,6 @@ private:
     WINDOW *m_window;
 };
 
-} // namespace editor
+} // namespace eli
 
-#endif /* _EDITOR_WINDOW_HPP_ */
+#endif /* _ELI_WINDOW_HPP_ */

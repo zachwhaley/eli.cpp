@@ -4,7 +4,7 @@
 
 using namespace std;
 
-namespace editor {
+namespace eli {
 
 string slurp(const string &filename)
 {
@@ -20,4 +20,4 @@ string slurp(const string &filename)
     return str;
 }
 
-} // namespace editor
+} // namespace eli

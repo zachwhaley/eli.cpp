@@ -3,7 +3,7 @@
 #include "editor.hpp"
 
 using namespace std;
-using namespace editor;
+using namespace eli;
 
 int main(int argc, char *argv[])
 {

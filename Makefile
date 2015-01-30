@@ -2,7 +2,7 @@ CXX = g++
 CPPFLAGS = -g -Wall -std=c++11
 LIBS = -lncurses
 
-PROJECT = editor
+PROJECT = eli
 SRCDIR = src
 OBJDIR = obj
 SOURCES = $(wildcard $(SRCDIR)/*.cpp)
