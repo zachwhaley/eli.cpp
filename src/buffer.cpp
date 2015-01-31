@@ -62,8 +62,7 @@ Buffer::update(int ch, Cursor *cur)
     }
     else {
         string &line = m_lines[cur->y];
-        line.insert(cur->x, 1, ch);
-        cur->x++;
+        line.insert(cur->x++, 1, ch);
     }
     // Correct column value
     if (cur->x > m_lines[cur->y].length()) {
