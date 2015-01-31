@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include "buffer.hpp"
+
 namespace eli {
 
 class Editor
@@ -15,6 +17,9 @@ public:
 
     /* Open the contents from filename to be edited */
     void open(const std::string &filename);
+
+private:
+    Buffer m_buffer;
 };
 
 } // namespace eli
