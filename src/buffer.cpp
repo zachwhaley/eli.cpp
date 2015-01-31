@@ -60,12 +60,10 @@ Buffer::update(int ch, Cursor *cur)
     else if (ch == KEY_END) {
         cur->x = m_lines[cur->y].length();
     }
-    else if (cur->y < m_lines.size()) {
+    else {
         string &line = m_lines[cur->y];
-        if (cur->x <= line.length()) {
-            line.insert(cur->x, 1, ch);
-            cur->x++;
-        }
+        line.insert(cur->x, 1, ch);
+        cur->x++;
     }
     // Correct column value
     if (cur->x > m_lines[cur->y].length()) {
