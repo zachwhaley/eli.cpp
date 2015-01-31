@@ -30,18 +30,18 @@ void
 Editor::edit()
 {
     int ch;
-    unsigned cur_y = 0, cur_x = 0;
+    Cursor cur;
 
     while (true) {
         m_buffer.display();
 
-        move(cur_y, cur_x);
+        move(cur.y, cur.x);
         ch = getch();
         if (ch == KEY_F(12)) {
             return;
         }
         else {
-            m_buffer.update(ch, cur_y, cur_x);
+            m_buffer.update(ch, &cur);
         }
     }
 }

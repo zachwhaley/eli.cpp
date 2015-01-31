@@ -24,34 +24,37 @@ Buffer::read(const char *filename)
 }
 
 void
-Buffer::update(int ch, unsigned &row, unsigned &col)
+Buffer::update(int ch, Cursor *cur)
 {
+    // Better safe than sorry
+    if (!cur) return;
+
     if (ch == KEY_UP) {
-        if (row != 0)
-            row--;
+        if (cur->y != 0)
+            cur->y--;
     }
     else if (ch == KEY_DOWN) {
-        if (row != m_lines.size() - 1)
-            row++;
+        if (cur->y != m_lines.size() - 1)
+            cur->y++;
     }
     else if (ch == KEY_RIGHT) {
-        if (col != m_lines[row].length())
-            col++;
+        if (cur->x != m_lines[cur->y].length())
+            cur->x++;
     }
     else if (ch == KEY_LEFT) {
-        if (col != 0)
-            col--;
+        if (cur->x != 0)
+            cur->x--;
     }
-    else if (row < m_lines.size()) {
-        string &line = m_lines[row];
-        if (col <= line.length()) {
-            line.insert(col, 1, ch);
-            col++;
+    else if (cur->y < m_lines.size()) {
+        string &line = m_lines[cur->y];
+        if (cur->x <= line.length()) {
+            line.insert(cur->x, 1, ch);
+            cur->x++;
         }
     }
     // Correct column value
-    if (col > m_lines[row].length()) {
-        col = m_lines[row].length();
+    if (cur->x > m_lines[cur->y].length()) {
+        cur->x = m_lines[cur->y].length();
     }
 }
 

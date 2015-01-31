@@ -6,11 +6,16 @@
 
 namespace eli {
 
+struct Cursor {
+    unsigned int y = 0;
+    unsigned int x = 0;
+};
+
 class Buffer
 {
 public:
     void read(const char *filename);
-    void update(int ch, unsigned &row, unsigned &col);
+    void update(int ch, Cursor *cur);
     void display();
 
 private:
