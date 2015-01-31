@@ -16,7 +16,7 @@ public:
     ~Editor();
 
     /* Open the contents from filename to be edited */
-    void open(const std::string &filename);
+    void open(const char *filename);
 
 private:
     Buffer m_buffer;

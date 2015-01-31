@@ -22,11 +22,10 @@ Editor::~Editor()
     endwin();
 }
 
-void Editor::open(const string &filename)
+void
+Editor::open(const char *filename)
 {
-    string text = slurp(filename);
-    display(text);
-    start_editing();
+    m_buffer.read(filename);
 }
 
 static int start_editing()
