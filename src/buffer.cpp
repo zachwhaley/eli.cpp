@@ -45,6 +45,12 @@ Buffer::update(int ch, Cursor *cur)
         if (cur->x != 0)
             cur->x--;
     }
+    else if (ch == KEY_HOME) {
+        cur->x = 0;
+    }
+    else if (ch == KEY_END) {
+        cur->x = m_lines[cur->y].length();
+    }
     else if (cur->y < m_lines.size()) {
         string &line = m_lines[cur->y];
         if (cur->x <= line.length()) {
