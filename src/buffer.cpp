@@ -24,6 +24,15 @@ Buffer::read(const char *filename)
 }
 
 void
+Buffer::write() const
+{
+    ofstream ofs {m_filename, ios::out | ios::trunc};
+    for (string line : m_lines) {
+        ofs << line << endl;
+    }
+}
+
+void
 Buffer::update(int ch, Cursor *cur)
 {
     // Better safe than sorry

@@ -15,6 +15,7 @@ class Buffer
 {
 public:
     void read(const char *filename);
+    void write() const;
     void update(int ch, Cursor *cur);
     void display() const;
 

@@ -40,6 +40,9 @@ Editor::edit()
         if (ch == KEY_F(12)) {
             return;
         }
+        else if (ch == KEY_F(1)) {
+            m_buffer.write();
+        }
         else {
             m_buffer.update(ch, &cur);
         }
