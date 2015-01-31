@@ -7,8 +7,6 @@ using namespace std;
 
 namespace eli {
 
-static int start_editing();
-
 Editor::Editor()
 {
     initscr();
@@ -28,38 +26,44 @@ Editor::open(const char *filename)
     m_buffer.read(filename);
 }
 
-static int start_editing()
+void
+Editor::edit()
 {
     int ch;
+    unsigned cur_y = 0, cur_x = 0;
+
     while (true) {
+        m_buffer.display();
+
+        move(cur_y, cur_x);
         ch = getch();
         if (ch == KEY_F(12)) {
-            return 0;
+            return;
         }
         else {
-            int cur_y, cur_x;
-            getyx(stdscr, cur_y, cur_x);
             switch(ch) {
                 case KEY_UP:
-                    move(--cur_y, cur_x);
+                    if (cur_y != 0) {
+                        cur_y--;
+                    }
                     break;
                 case KEY_DOWN:
-                    move(++cur_y, cur_x);
+                    cur_y++;
                     break;
                 case KEY_RIGHT:
-                    move(cur_y, ++cur_x);
+                    cur_x++;
                     break;
                 case KEY_LEFT:
-                    move(cur_y, --cur_x);
+                    if (cur_x != 0) {
+                        cur_x--;
+                    }
                     break;
                 default:
-                    insch(ch);
-                    move(cur_y, ++cur_x);
+                    m_buffer.insert(ch, cur_y, cur_x);
                     break;
             }
         }
     }
-    return 0;
 }
 
 } // namespace eli

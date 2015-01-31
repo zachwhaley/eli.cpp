@@ -17,6 +17,7 @@ public:
 
     /* Open the contents from filename to be edited */
     void open(const char *filename);
+    void edit();
 
 private:
     Buffer m_buffer;
