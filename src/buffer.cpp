@@ -60,6 +60,12 @@ Buffer::update(int ch, Cursor *cur)
     else if (ch == KEY_END) {
         cur->x = m_lines[cur->y].length();
     }
+    else if (ch == KEY_BACKSPACE) {
+        if (cur->x != 0) {
+            string &line = m_lines[cur->y];
+            line.erase(--cur->x, 1);
+        }
+    }
     else {
         string &line = m_lines[cur->y];
         line.insert(cur->x++, 1, ch);
@@ -73,9 +79,16 @@ Buffer::update(int ch, Cursor *cur)
 void
 Buffer::display() const
 {
-    int row = 0;
+    unsigned row = 0;
+    const unsigned cols = COLS;
     for (string line : m_lines) {
-        mvaddstr(row++, 0, line.c_str());
+        move(row++, 0);
+        for (unsigned col = 0; col < cols; col++) {
+            if (col < line.length())
+                addch(line[col]);
+            else
+                addch(' ');
+        }
     }
     refresh();
 }
