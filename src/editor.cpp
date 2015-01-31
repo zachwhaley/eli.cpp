@@ -41,27 +41,7 @@ Editor::edit()
             return;
         }
         else {
-            switch(ch) {
-                case KEY_UP:
-                    if (cur_y != 0) {
-                        cur_y--;
-                    }
-                    break;
-                case KEY_DOWN:
-                    cur_y++;
-                    break;
-                case KEY_RIGHT:
-                    cur_x++;
-                    break;
-                case KEY_LEFT:
-                    if (cur_x != 0) {
-                        cur_x--;
-                    }
-                    break;
-                default:
-                    m_buffer.insert(ch, cur_y, cur_x);
-                    break;
-            }
+            m_buffer.update(ch, cur_y, cur_x);
         }
     }
 }

@@ -24,14 +24,34 @@ Buffer::read(const char *filename)
 }
 
 void
-Buffer::insert(char ch, unsigned &row, unsigned &col)
+Buffer::update(int ch, unsigned &row, unsigned &col)
 {
-    if (row <= m_lines.size()) {
+    if (ch == KEY_UP) {
+        if (row != 0)
+            row--;
+    }
+    else if (ch == KEY_DOWN) {
+        if (row != m_lines.size() - 1)
+            row++;
+    }
+    else if (ch == KEY_RIGHT) {
+        if (col != m_lines[row].length())
+            col++;
+    }
+    else if (ch == KEY_LEFT) {
+        if (col != 0)
+            col--;
+    }
+    else if (row < m_lines.size()) {
         string &line = m_lines[row];
         if (col <= line.length()) {
             line.insert(col, 1, ch);
             col++;
         }
+    }
+    // Correct column value
+    if (col > m_lines[row].length()) {
+        col = m_lines[row].length();
     }
 }
 

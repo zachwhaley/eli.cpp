@@ -10,7 +10,7 @@ class Buffer
 {
 public:
     void read(const char *filename);
-    void insert(char ch, unsigned &row, unsigned &col);
+    void update(int ch, unsigned &row, unsigned &col);
     void display();
 
 private:
