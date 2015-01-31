@@ -16,7 +16,7 @@ class Buffer
 public:
     void read(const char *filename);
     void update(int ch, Cursor *cur);
-    void display();
+    void display() const;
 
 private:
     std::string m_filename;

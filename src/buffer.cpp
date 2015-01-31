@@ -65,10 +65,10 @@ Buffer::update(int ch, Cursor *cur)
 }
 
 void
-Buffer::display()
+Buffer::display() const
 {
     int row = 0;
-    for (string &line : m_lines) {
+    for (string line : m_lines) {
         mvaddstr(row++, 0, line.c_str());
     }
     refresh();
