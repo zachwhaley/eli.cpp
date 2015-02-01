@@ -39,35 +39,36 @@ Buffer::update(int ch, Cursor *cur)
     if (!cur) return;
     if (cur->y >= m_lines.size()) return;
 
-    if (ch == KEY_UP) {
+    switch (ch) {
+    case KEY_UP:
         if (cur->y != 0)
             cur->y--;
-    }
-    else if (ch == KEY_DOWN) {
+        break;
+    case KEY_DOWN:
         if (cur->y != m_lines.size() - 1)
             cur->y++;
-    }
-    else if (ch == KEY_RIGHT) {
+        break;
+    case KEY_RIGHT:
         if (cur->x != m_lines[cur->y].length())
             cur->x++;
-    }
-    else if (ch == KEY_LEFT) {
+        break;
+    case KEY_LEFT:
         if (cur->x != 0)
             cur->x--;
-    }
-    else if (ch == KEY_HOME) {
+        break;
+    case KEY_HOME:
         cur->x = 0;
-    }
-    else if (ch == KEY_END) {
+        break;
+    case KEY_END:
         cur->x = m_lines[cur->y].length();
-    }
-    else if (ch == KEY_BACKSPACE) {
+        break;
+    case KEY_BACKSPACE:
         if (cur->x != 0) {
             string &line = m_lines[cur->y];
             line.erase(--cur->x, 1);
         }
-    }
-    else {
+        break;
+    default:
         string &line = m_lines[cur->y];
         line.insert(cur->x++, 1, ch);
     }
