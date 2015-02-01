@@ -1,6 +1,5 @@
 #include "editor.hpp"
 
-#include "file_io.hpp"
 #include "window.hpp"
 
 using namespace std;
