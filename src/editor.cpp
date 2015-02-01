@@ -1,6 +1,6 @@
 #include "editor.hpp"
 
-#include "window.hpp"
+#include <ncurses.h>
 
 using namespace std;
 
