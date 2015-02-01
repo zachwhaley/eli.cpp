@@ -62,7 +62,7 @@ Buffer::update(int ch)
             m_cur.x = m_lines[--m_cur.y].length();
         break;
     case KEY_HOME:
-        m_cur.x = 0;
+        begofline();
         break;
     case KEY_END:
         m_cur.x = m_lines[m_cur.y].length();
@@ -111,6 +111,12 @@ Buffer::display() const
     }
     move(m_cur.y, m_cur.x);
     refresh();
+}
+
+void
+Buffer::begofline()
+{
+    m_cur.x = 0;
 }
 
 } // namespace eli

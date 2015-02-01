@@ -20,6 +20,9 @@ public:
     void display() const;
 
 private:
+    void begofline();
+
+private:
     Cursor m_cur;
     std::string m_filename;
     std::vector<std::string> m_lines;
