@@ -16,10 +16,11 @@ class Buffer
 public:
     void read(const char *filename);
     void write() const;
-    void update(int ch, Cursor *cur);
+    void update(int ch);
     void display() const;
 
 private:
+    Cursor m_cur;
     std::string m_filename;
     std::vector<std::string> m_lines;
 };

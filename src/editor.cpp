@@ -29,12 +29,10 @@ void
 Editor::edit()
 {
     int ch;
-    Cursor cur;
 
     while (true) {
         m_buffer.display();
 
-        move(cur.y, cur.x);
         ch = getch();
         if (ch == KEY_F(12)) {
             return;
@@ -43,7 +41,7 @@ Editor::edit()
             m_buffer.write();
         }
         else {
-            m_buffer.update(ch, &cur);
+            m_buffer.update(ch);
         }
     }
 }

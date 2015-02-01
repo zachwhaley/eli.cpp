@@ -33,67 +33,66 @@ Buffer::write() const
 }
 
 void
-Buffer::update(int ch, Cursor *cur)
+Buffer::update(int ch)
 {
     // Better safe than sorry
-    if (!cur) return;
-    if (cur->y >= m_lines.size()) return;
+    if (m_cur.y >= m_lines.size()) return;
 
     switch (ch) {
     case KEY_UP:
-        if (cur->y != 0)
-            cur->y--;
+        if (m_cur.y != 0)
+            m_cur.y--;
         break;
     case KEY_DOWN:
-        if (cur->y != m_lines.size() - 1)
-            cur->y++;
+        if (m_cur.y != m_lines.size() - 1)
+            m_cur.y++;
         break;
     case KEY_RIGHT:
-        if (cur->x != m_lines[cur->y].length())
-            cur->x++;
-        else if (cur->y != m_lines.size() - 1) {
-            cur->y++;
-            cur->x = 0;
+        if (m_cur.x != m_lines[m_cur.y].length())
+            m_cur.x++;
+        else if (m_cur.y != m_lines.size() - 1) {
+            m_cur.y++;
+            m_cur.x = 0;
         }
         break;
     case KEY_LEFT:
-        if (cur->x != 0)
-            cur->x--;
-        else if (cur->y != 0)
-            cur->x = m_lines[--cur->y].length();
+        if (m_cur.x != 0)
+            m_cur.x--;
+        else if (m_cur.y != 0)
+            m_cur.x = m_lines[--m_cur.y].length();
         break;
     case KEY_HOME:
-        cur->x = 0;
+        m_cur.x = 0;
         break;
     case KEY_END:
-        cur->x = m_lines[cur->y].length();
+        m_cur.x = m_lines[m_cur.y].length();
         break;
     case KEY_BACKSPACE:
-        if (cur->x != 0)
-            m_lines[cur->y].erase(--cur->x, 1);
-        else if (cur->y != 0) {
-            string old_line = m_lines[cur->y];
-            m_lines.erase(m_lines.begin() + cur->y);
-            cur->x = m_lines[--cur->y].length();
-            m_lines[cur->y] += old_line;
+        if (m_cur.x != 0)
+            m_lines[m_cur.y].erase(--m_cur.x, 1);
+        else if (m_cur.y != 0) {
+            string old_line = m_lines[m_cur.y];
+            m_lines.erase(m_lines.begin() + m_cur.y);
+            m_cur.x = m_lines[--m_cur.y].length();
+            m_lines[m_cur.y] += old_line;
         }
         break;
     case '\n':
     case '\r':
     {
-        string new_line = m_lines[cur->y].substr(cur->x);
-        m_lines[cur->y++].erase(cur->x);
+        string new_line = m_lines[m_cur.y].substr(m_cur.x);
+        m_lines[m_cur.y++].erase(m_cur.x);
 
-        m_lines.insert(m_lines.begin() + cur->y, new_line);
-        cur->x = 0;
+        m_lines.insert(m_lines.begin() + m_cur.y, new_line);
+        m_cur.x = 0;
         break;
     }
     default:
-        m_lines[cur->y].insert(cur->x++, 1, ch);
+        m_lines[m_cur.y].insert(m_cur.x++, 1, ch);
     }
     // Correct column value
-    if (cur->x > m_lines[cur->y].length()) {
-        cur->x = m_lines[cur->y].length();
+    if (m_cur.x > m_lines[m_cur.y].length()) {
+        m_cur.x = m_lines[m_cur.y].length();
     }
 }
 
@@ -110,6 +109,7 @@ Buffer::display() const
                 addch(' ');
         }
     }
+    move(m_cur.y, m_cur.x);
     refresh();
 }
 
