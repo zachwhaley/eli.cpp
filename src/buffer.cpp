@@ -58,14 +58,7 @@ Buffer::update(int ch)
         endofline();
         break;
     case KEY_BACKSPACE:
-        if (m_cur.x != 0)
-            m_lines[m_cur.y].erase(--m_cur.x, 1);
-        else if (m_cur.y != 0) {
-            string old_line = m_lines[m_cur.y];
-            m_lines.erase(m_lines.begin() + m_cur.y);
-            m_cur.x = m_lines[--m_cur.y].length();
-            m_lines[m_cur.y] += old_line;
-        }
+        delchar();
         break;
     case '\n':
     case '\r':
@@ -156,6 +149,22 @@ void
 Buffer::endofline()
 {
     m_cur.x = m_lines[m_cur.y].length();
+}
+
+void
+Buffer::delchar()
+{
+    if (m_cur.x != 0) {
+        m_lines[m_cur.y].erase(m_cur.x - 1, 1);
+        prevchar();
+    }
+    else if (m_cur.y != 0) {
+        string old_line = m_lines[m_cur.y];
+        m_lines.erase(m_lines.begin() + m_cur.y);
+        prevchar();
+        // Append what was left of the erased line to the now current line
+        m_lines[m_cur.y] += old_line;
+    }
 }
 
 void
