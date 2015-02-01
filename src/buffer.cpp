@@ -71,6 +71,12 @@ Buffer::update(int ch, Cursor *cur)
     case KEY_BACKSPACE:
         if (cur->x != 0)
             m_lines[cur->y].erase(--cur->x, 1);
+        else if (cur->y != 0) {
+            string old_line = m_lines[cur->y];
+            m_lines.erase(m_lines.begin() + cur->y);
+            cur->x = m_lines[--cur->y].length();
+            m_lines[cur->y] += old_line;
+        }
         break;
     case '\n':
     case '\r':
