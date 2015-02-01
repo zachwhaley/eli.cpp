@@ -49,10 +49,7 @@ Buffer::update(int ch)
         nextchar();
         break;
     case KEY_LEFT:
-        if (m_cur.x != 0)
-            m_cur.x--;
-        else if (m_cur.y != 0)
-            m_cur.x = m_lines[--m_cur.y].length();
+        prevchar();
         break;
     case KEY_HOME:
         begofline();
@@ -137,6 +134,18 @@ Buffer::nextchar()
     else if (m_cur.y != m_lines.size() - 1) {
         m_cur.y++;
         begofline();
+    }
+}
+
+void
+Buffer::prevchar()
+{
+    if (m_cur.x != 0) {
+        m_cur.x--;
+    }
+    else if (m_cur.y != 0) {
+        m_cur.y--;
+        endofline();
     }
 }
 

@@ -23,6 +23,7 @@ private:
     void nextline();
     void prevline();
     void nextchar();
+    void prevchar();
     void begofline();
     void endofline();
 
