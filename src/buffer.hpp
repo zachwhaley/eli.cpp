@@ -20,6 +20,7 @@ public:
     void display() const;
 
 private:
+    void nextline();
     void prevline();
     void begofline();
     void endofline();
