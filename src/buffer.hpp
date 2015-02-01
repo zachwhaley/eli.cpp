@@ -26,6 +26,7 @@ private:
     void prevchar();
     void begofline();
     void endofline();
+    void addchar(char ch);
 
 private:
     Cursor m_cur;

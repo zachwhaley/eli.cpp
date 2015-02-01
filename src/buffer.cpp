@@ -78,12 +78,9 @@ Buffer::update(int ch)
         break;
     }
     default:
-        m_lines[m_cur.y].insert(m_cur.x++, 1, ch);
+        addchar(ch);
     }
     // Correct column value
-    if (m_cur.x > m_lines[m_cur.y].length()) {
-        m_cur.x = m_lines[m_cur.y].length();
-    }
 }
 
 void
@@ -159,6 +156,13 @@ void
 Buffer::endofline()
 {
     m_cur.x = m_lines[m_cur.y].length();
+}
+
+void
+Buffer::addchar(char ch)
+{
+    m_lines[m_cur.y].insert(m_cur.x, 1, ch);
+    nextchar();
 }
 
 } // namespace eli
