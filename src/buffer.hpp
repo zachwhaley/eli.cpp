@@ -21,6 +21,7 @@ public:
 
 private:
     void begofline();
+    void endofline();
 
 private:
     Cursor m_cur;

@@ -65,7 +65,7 @@ Buffer::update(int ch)
         begofline();
         break;
     case KEY_END:
-        m_cur.x = m_lines[m_cur.y].length();
+        endofline();
         break;
     case KEY_BACKSPACE:
         if (m_cur.x != 0)
@@ -117,6 +117,12 @@ void
 Buffer::begofline()
 {
     m_cur.x = 0;
+}
+
+void
+Buffer::endofline()
+{
+    m_cur.x = m_lines[m_cur.y].length();
 }
 
 } // namespace eli
