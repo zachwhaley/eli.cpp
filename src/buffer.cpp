@@ -51,10 +51,16 @@ Buffer::update(int ch, Cursor *cur)
     case KEY_RIGHT:
         if (cur->x != m_lines[cur->y].length())
             cur->x++;
+        else if (cur->y != m_lines.size() - 1) {
+            cur->y++;
+            cur->x = 0;
+        }
         break;
     case KEY_LEFT:
         if (cur->x != 0)
             cur->x--;
+        else if (cur->y != 0)
+            cur->x = m_lines[--cur->y].length();
         break;
     case KEY_HOME:
         cur->x = 0;
