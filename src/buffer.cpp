@@ -66,6 +66,16 @@ Buffer::update(int ch, Cursor *cur)
         if (cur->x != 0)
             m_lines[cur->y].erase(--cur->x, 1);
         break;
+    case '\n':
+    case '\r':
+    {
+        string new_line = m_lines[cur->y].substr(cur->x);
+        m_lines[cur->y++].erase(cur->x);
+
+        m_lines.insert(m_lines.begin() + cur->y, new_line);
+        cur->x = 0;
+        break;
+    }
     default:
         m_lines[cur->y].insert(cur->x++, 1, ch);
     }
