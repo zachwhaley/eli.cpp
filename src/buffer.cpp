@@ -37,6 +37,7 @@ Buffer::update(int ch, Cursor *cur)
 {
     // Better safe than sorry
     if (!cur) return;
+    if (cur->y >= m_lines.size()) return;
 
     if (ch == KEY_UP) {
         if (cur->y != 0)
