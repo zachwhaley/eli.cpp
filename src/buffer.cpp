@@ -40,8 +40,7 @@ Buffer::update(int ch)
 
     switch (ch) {
     case KEY_UP:
-        if (m_cur.y != 0)
-            m_cur.y--;
+        prevline();
         break;
     case KEY_DOWN:
         if (m_cur.y != m_lines.size() - 1)
@@ -111,6 +110,17 @@ Buffer::display() const
     }
     move(m_cur.y, m_cur.x);
     refresh();
+}
+
+void
+Buffer::prevline()
+{
+    if (m_cur.y != 0) {
+        m_cur.y--;
+    }
+    if (m_cur.x > m_lines[m_cur.y].length()) {
+        endofline();
+    }
 }
 
 void
