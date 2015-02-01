@@ -62,14 +62,8 @@ Buffer::update(int ch)
         break;
     case '\n':
     case '\r':
-    {
-        string new_line = m_lines[m_cur.y].substr(m_cur.x);
-        m_lines[m_cur.y++].erase(m_cur.x);
-
-        m_lines.insert(m_lines.begin() + m_cur.y, new_line);
-        m_cur.x = 0;
+        newline();
         break;
-    }
     default:
         addchar(ch);
     }
@@ -165,6 +159,16 @@ Buffer::delchar()
         // Append what was left of the erased line to the now current line
         m_lines[m_cur.y] += old_line;
     }
+}
+
+void
+Buffer::newline()
+{
+    string new_line = m_lines[m_cur.y].substr(m_cur.x);
+    m_lines[m_cur.y].erase(m_cur.x);
+    auto new_pos = m_lines.begin() + m_cur.y + 1;
+    m_lines.insert(new_pos, new_line);
+    nextchar();
 }
 
 void

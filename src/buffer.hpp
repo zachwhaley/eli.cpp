@@ -27,6 +27,7 @@ private:
     void begofline();
     void endofline();
     void delchar();
+    void newline();
     void addchar(char ch);
 
 private:
