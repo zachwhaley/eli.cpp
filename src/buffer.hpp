@@ -22,6 +22,7 @@ public:
 private:
     void nextline();
     void prevline();
+    void nextchar();
     void begofline();
     void endofline();
 

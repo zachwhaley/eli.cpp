@@ -46,12 +46,7 @@ Buffer::update(int ch)
         nextline();
         break;
     case KEY_RIGHT:
-        if (m_cur.x != m_lines[m_cur.y].length())
-            m_cur.x++;
-        else if (m_cur.y != m_lines.size() - 1) {
-            m_cur.y++;
-            m_cur.x = 0;
-        }
+        nextchar();
         break;
     case KEY_LEFT:
         if (m_cur.x != 0)
@@ -130,6 +125,18 @@ Buffer::prevline()
     }
     if (m_cur.x > m_lines[m_cur.y].length()) {
         endofline();
+    }
+}
+
+void
+Buffer::nextchar()
+{
+    if (m_cur.x != m_lines[m_cur.y].length()) {
+        m_cur.x++;
+    }
+    else if (m_cur.y != m_lines.size() - 1) {
+        m_cur.y++;
+        begofline();
     }
 }
 
