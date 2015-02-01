@@ -94,13 +94,12 @@ Buffer::update(int ch, Cursor *cur)
 void
 Buffer::display() const
 {
-    unsigned row = 0;
-    const unsigned cols = COLS;
-    for (string line : m_lines) {
-        move(row++, 0);
+    const unsigned cols = COLS, lines = LINES;
+    for (unsigned line = 0; line < lines; line++) {
+        move(line, 0);
         for (unsigned col = 0; col < cols; col++) {
-            if (col < line.length())
-                addch(line[col]);
+            if (line < m_lines.size() && col < m_lines[line].length())
+                addch(m_lines[line][col]);
             else
                 addch(' ');
         }
