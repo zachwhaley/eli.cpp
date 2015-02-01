@@ -63,14 +63,11 @@ Buffer::update(int ch, Cursor *cur)
         cur->x = m_lines[cur->y].length();
         break;
     case KEY_BACKSPACE:
-        if (cur->x != 0) {
-            string &line = m_lines[cur->y];
-            line.erase(--cur->x, 1);
-        }
+        if (cur->x != 0)
+            m_lines[cur->y].erase(--cur->x, 1);
         break;
     default:
-        string &line = m_lines[cur->y];
-        line.insert(cur->x++, 1, ch);
+        m_lines[cur->y].insert(cur->x++, 1, ch);
     }
     // Correct column value
     if (cur->x > m_lines[cur->y].length()) {
