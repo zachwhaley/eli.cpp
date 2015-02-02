@@ -64,7 +64,6 @@ Buffer::update(int ch)
     default:
         addchar(ch);
     }
-    // Correct column value
 }
 
 void
