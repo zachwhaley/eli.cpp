@@ -20,15 +20,15 @@ public:
     void display() const;
 
 private:
+    void begofline();
+    void endofline();
     void nextline();
     void prevline();
     void nextchar();
     void prevchar();
-    void begofline();
-    void endofline();
+    void addchar(char ch);
     void delchar();
     void newline();
-    void addchar(char ch);
 
 private:
     Cursor m_cur;

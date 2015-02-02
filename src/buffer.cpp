@@ -85,6 +85,18 @@ Buffer::display() const
 }
 
 void
+Buffer::begofline()
+{
+    m_cur.x = 0;
+}
+
+void
+Buffer::endofline()
+{
+    m_cur.x = m_lines[m_cur.y].length();
+}
+
+void
 Buffer::nextline()
 {
     if (m_cur.y != m_lines.size() - 1) {
@@ -131,15 +143,10 @@ Buffer::prevchar()
 }
 
 void
-Buffer::begofline()
+Buffer::addchar(char ch)
 {
-    m_cur.x = 0;
-}
-
-void
-Buffer::endofline()
-{
-    m_cur.x = m_lines[m_cur.y].length();
+    m_lines[m_cur.y].insert(m_cur.x, 1, ch);
+    nextchar();
 }
 
 void
@@ -165,13 +172,6 @@ Buffer::newline()
     m_lines[m_cur.y].erase(m_cur.x);
     auto new_pos = m_lines.begin() + m_cur.y + 1;
     m_lines.insert(new_pos, new_line);
-    nextchar();
-}
-
-void
-Buffer::addchar(char ch)
-{
-    m_lines[m_cur.y].insert(m_cur.x, 1, ch);
     nextchar();
 }
 
