@@ -2,11 +2,9 @@
 
 #include "editor.hpp"
 
-using namespace eli;
-
 int main(int argc, const char *argv[])
 {
-    Editor editor;
+    eli::Editor editor;
 
     if (argc > 1) {
         editor.open(argv[1]);
