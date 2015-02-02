@@ -2,7 +2,6 @@
 
 #include "editor.hpp"
 
-using namespace std;
 using namespace eli;
 
 int main(int argc, const char *argv[])
