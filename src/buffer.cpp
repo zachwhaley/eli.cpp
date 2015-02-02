@@ -35,9 +35,6 @@ Buffer::write() const
 void
 Buffer::update(int ch)
 {
-    // Better safe than sorry
-    if (m_cur.y >= m_lines.size()) return;
-
     switch (ch) {
     case KEY_UP:
         prevline();
