@@ -70,10 +70,10 @@ Buffer::update(int ch)
 void
 Buffer::display() const
 {
-    const unsigned cols = COLS, lines = LINES;
-    for (unsigned line = 0; line < lines; line++) {
+    const size_t cols = COLS, lines = LINES;
+    for (size_t line = 0; line < lines; line++) {
         move(line, 0);
-        for (unsigned col = 0; col < cols; col++) {
+        for (size_t col = 0; col < cols; col++) {
             if (line < m_lines.size() && col < m_lines[line].length())
                 addch(m_lines[line][col]);
             else
