@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include <ncurses.h>
+
 namespace eli {
 
 struct Cursor {
@@ -14,12 +16,15 @@ struct Cursor {
 class Buffer
 {
 public:
+    ~Buffer();
     void read(const char *filename);
     void write() const;
+    int getchar() const;
     void update(int ch);
-    void display() const;
+    void display();
 
 private:
+    void initwindows();
     void begofline();
     void endofline();
     void nextline();
@@ -34,6 +39,7 @@ private:
     Cursor m_cur;
     std::string m_filename;
     std::vector<std::string> m_lines;
+    WINDOW *m_textwin = nullptr;
 };
 
 } // namespace eli

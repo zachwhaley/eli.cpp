@@ -11,7 +11,6 @@ Editor::Editor()
     initscr();
     cbreak();
     noecho();
-    keypad(stdscr, true);
 }
 
 Editor::~Editor()
@@ -33,7 +32,7 @@ Editor::edit()
     while (true) {
         m_buffer.display();
 
-        ch = getch();
+        ch = m_buffer.getchar();
         if (ch == KEY_F(12)) {
             return;
         }

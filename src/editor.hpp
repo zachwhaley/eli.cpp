@@ -10,11 +10,8 @@ namespace eli {
 class Editor
 {
 public:
-    /* Constructor */
     Editor();
-    /* Destructor */
     ~Editor();
-
     /* Open the contents from filename to be edited */
     void open(const char *filename);
     void edit();

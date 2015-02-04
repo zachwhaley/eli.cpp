@@ -2,11 +2,16 @@
 
 #include <fstream>
 
-#include <ncurses.h>
-
 using namespace std;
 
 namespace eli {
+
+Buffer::~Buffer()
+{
+    if (m_textwin) {
+        delwin(m_textwin);
+    }
+}
 
 void
 Buffer::read(const char *filename)
@@ -30,6 +35,12 @@ Buffer::write() const
     for (string line : m_lines) {
         ofs << line << endl;
     }
+}
+
+int
+Buffer::getchar() const
+{
+    return wgetch(m_textwin);
 }
 
 void
@@ -67,20 +78,31 @@ Buffer::update(int ch)
 }
 
 void
-Buffer::display() const
+Buffer::display()
 {
+    initwindows();
     const size_t cols = COLS, lines = LINES;
     for (size_t line = 0; line < lines; line++) {
-        move(line, 0);
+        wmove(m_textwin, line, 0);
         for (size_t col = 0; col < cols; col++) {
             if (line < m_lines.size() && col < m_lines[line].length())
-                addch(m_lines[line][col]);
+                waddch(m_textwin, m_lines[line][col]);
             else
-                addch(' ');
+                waddch(m_textwin, ' ');
         }
     }
-    move(m_cur.y, m_cur.x);
-    refresh();
+    wmove(m_textwin, m_cur.y, m_cur.x);
+    wrefresh(m_textwin);
+}
+
+void
+Buffer::initwindows()
+{
+    if (!m_textwin) {
+        m_textwin = newwin(LINES, COLS, 0, 0);
+        keypad(m_textwin, true);
+        scrollok(m_textwin, false);
+    }
 }
 
 void
