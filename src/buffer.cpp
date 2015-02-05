@@ -1,6 +1,7 @@
 #include "buffer.hpp"
 
 #include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -10,6 +11,9 @@ Buffer::~Buffer()
 {
     if (m_textwin) {
         delwin(m_textwin);
+    }
+    if (m_titlewin) {
+        delwin(m_titlewin);
     }
 }
 
@@ -82,7 +86,20 @@ Buffer::display()
 {
     initwindows();
     const size_t cols = COLS, lines = LINES;
-    for (size_t line = 0; line < lines; line++) {
+
+    // Refresh title window
+    wmove(m_titlewin, 0, 0);
+    for (size_t col = 0; col < cols; col++) {
+        waddch(m_titlewin, ' ');
+    }
+    stringstream ss;
+    ss << " " << m_filename << " " << m_cur.y << "," << m_cur.x;
+    string title = ss.str();
+    mvwaddstr(m_titlewin, 0, 0, title.c_str());
+    wnoutrefresh(m_titlewin);
+
+    // Refresh text window
+    for (size_t line = 0; line < lines - 1; line++) {
         wmove(m_textwin, line, 0);
         for (size_t col = 0; col < cols; col++) {
             if (line < m_lines.size() && col < m_lines[line].length())
@@ -91,15 +108,21 @@ Buffer::display()
                 waddch(m_textwin, ' ');
         }
     }
+    wnoutrefresh(m_textwin);
     wmove(m_textwin, m_cur.y, m_cur.x);
-    wrefresh(m_textwin);
+    doupdate();
 }
 
 void
 Buffer::initwindows()
 {
+    const int cols = COLS, lines = LINES;
+    if (!m_titlewin) {
+        m_titlewin = newwin(1, cols, lines - 1, 0);
+        wattron(m_titlewin, A_REVERSE);
+    }
     if (!m_textwin) {
-        m_textwin = newwin(LINES, COLS, 0, 0);
+        m_textwin = newwin(lines - 1, cols, 0, 0);
         keypad(m_textwin, true);
         scrollok(m_textwin, false);
     }

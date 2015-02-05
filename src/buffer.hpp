@@ -40,6 +40,7 @@ private:
     std::string m_filename;
     std::vector<std::string> m_lines;
     WINDOW *m_textwin = nullptr;
+    WINDOW *m_titlewin = nullptr;
 };
 
 } // namespace eli
