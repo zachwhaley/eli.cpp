@@ -1,10 +1,8 @@
-eli (short for Eliana)
-======
+# eli (short for Eliana)
 
 A bare bones text editor written in C++
 
-Libraries
----------
+## Libraries
 
 [ncurses](https://www.gnu.org/software/ncurses/ncurses.html)
 
@@ -18,8 +16,7 @@ $ yum install ncurses ncurses-libs ncurses-static
 $ yum install gcc-c++
 ```
 
-What it Does
-------------
+## What it Does
 
 Displays a files content on the screen.
 
@@ -29,8 +26,7 @@ Type some things, and watch them appear.
 
 Press F1 to save and F12 to quit.
 
-How to Use it
-------------
+## How to Use it
 
 ```bash
 $ make
