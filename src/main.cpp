@@ -1,6 +1,6 @@
-#include <iostream>
-
 #include "editor.hpp"
+
+#include <iostream>
 
 int main(int argc, const char *argv[])
 {

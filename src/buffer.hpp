@@ -1,10 +1,10 @@
 #ifndef _ELI_BUFFER_HPP_
 #define _ELI_BUFFER_HPP_
 
+#include <ncurses.h>
+
 #include <string>
 #include <vector>
-
-#include <ncurses.h>
 
 namespace eli {
 

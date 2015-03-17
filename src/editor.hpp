@@ -1,9 +1,9 @@
 #ifndef _ELI_EDITOR_HPP_
 #define _ELI_EDITOR_HPP_
 
-#include <string>
-
 #include "buffer.hpp"
+
+#include <string>
 
 namespace eli {
 
