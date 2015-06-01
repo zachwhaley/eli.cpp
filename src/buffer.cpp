@@ -30,6 +30,9 @@ Buffer::read(const char *filename)
             m_lines.push_back(line);
         }
     }
+    else {
+        m_lines.push_back(string());
+    }
 }
 
 void
