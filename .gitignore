@@ -13,5 +13,8 @@ Session.vim
 *~
 
 # Tags
+tags
+TAGS
 .tags
+.TAGS
 cscope.*
