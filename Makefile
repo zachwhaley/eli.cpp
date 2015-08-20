@@ -5,7 +5,7 @@ PROJECT = eli
 SRCDIR = src
 OBJDIR = obj
 SRCS := $(wildcard $(SRCDIR)/*.cpp)
-OBJS := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o ,$(SOURCES))
+OBJS := $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 
 .PHONY: all clean
 
