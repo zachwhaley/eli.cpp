@@ -1,27 +1,26 @@
-CXX = g++
-CPPFLAGS = -g -Wall -std=c++11
-LIBS = -lncurses
+CXXFLAGS = -g -Wall -std=c++11
+LDLIBS = -lncurses
 
 PROJECT = eli
 SRCDIR = src
 OBJDIR = obj
-SOURCES = $(wildcard $(SRCDIR)/*.cpp)
-OBJECTS = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o ,$(SOURCES))
+SRCS := $(wildcard $(SRCDIR)/*.cpp)
+OBJS := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o ,$(SOURCES))
 
 .PHONY: all clean
 
 all: $(PROJECT)
 
-$(OBJECTS): | $(OBJDIR)
+$(OBJS): | $(OBJDIR)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
-$(PROJECT): $(OBJECTS)
-	$(CXX) $(OBJECTS) $(LIBS) -o $(PROJECT)
+$(PROJECT): $(OBJS)
+	$(CXX) $(OBJS) $(LDLIBS) -o $(PROJECT)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-	$(CXX) $(CPPFLAGS) -MMD -c $< -o $@
+	$(CXX) $(CXXFLAGS) -MMD -c $< -o $@
 
 clean:
 	rm -f -r $(OBJDIR) $(PROJECT)
