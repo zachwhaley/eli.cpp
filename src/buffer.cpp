@@ -72,7 +72,13 @@ Buffer::update(int ch)
     case KEY_END:
         endofline();
         break;
-    case KEY_BACKSPACE:
+    case KEY_DC:
+	if(m_cur.x != m_lines[m_cur.y].length()){
+	  nextchar();
+	  delchar();
+	}
+	break;
+    case 127:
         delchar();
         break;
     case '\n':
