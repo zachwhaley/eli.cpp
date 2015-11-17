@@ -1,6 +1,6 @@
 #ifndef _ELI_EDITOR_HPP_
 #define _ELI_EDITOR_HPP_
-#define CTRL(c) ((c) & 037)
+
 #include "buffer.hpp"
 
 #include <string>

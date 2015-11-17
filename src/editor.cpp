@@ -1,7 +1,7 @@
 #include "editor.hpp"
 
 #include <ncurses.h>
-
+#define CTRL(c) ((c) & 037)
 using namespace std;
 
 namespace eli {
