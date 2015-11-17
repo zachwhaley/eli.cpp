@@ -72,7 +72,7 @@ Buffer::update(int ch)
     case KEY_END:
         endofline();
         break;
-    case KEY_BACKSPACE:
+    case 127:
         delchar();
         break;
     case '\n':
