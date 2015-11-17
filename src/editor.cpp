@@ -36,7 +36,7 @@ Editor::edit()
         if (ch == KEY_F(12)) {
             return;
         }
-        else if (ch == KEY_F(1)) {
+        else if (ch == CTRL('w')) {
             m_buffer.write();
         }
         else {
