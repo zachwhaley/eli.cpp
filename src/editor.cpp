@@ -11,7 +11,7 @@ namespace eli {
 Editor::Editor()
 {
     initscr();
-    cbreak();
+    raw();
     noecho();
 }
 
@@ -35,7 +35,7 @@ Editor::edit()
         m_buffer.display();
 
         ch = m_buffer.getchar();
-        if (ch == KEY_F(12)) {
+        if (ch == CTRL('q')) {
             return;
         }
         else if (ch == CTRL('w')) {
