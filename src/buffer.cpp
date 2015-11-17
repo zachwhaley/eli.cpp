@@ -23,7 +23,7 @@ Buffer::read(const char *filename)
     m_filename = filename;
     m_lines.clear();
 
-    ifstream ifs {m_filename, ios::in};
+    ifstream ifs(m_filename, ios::in);
     if (ifs) {
         string line;
         while (getline(ifs, line)) {
@@ -38,7 +38,7 @@ Buffer::read(const char *filename)
 void
 Buffer::write() const
 {
-    ofstream ofs {m_filename, ios::out | ios::trunc};
+    ofstream ofs(m_filename, ios::out | ios::trunc);
     for (string line : m_lines) {
         ofs << line << endl;
     }
