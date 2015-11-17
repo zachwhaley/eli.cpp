@@ -39,6 +39,8 @@ Editor::edit()
         else if (ch == CTRL('w')) {
             m_buffer.write();
         }
+	else if (ch == KEY_RESIZE ) {
+        }
         else {
             m_buffer.update(ch);
         }
