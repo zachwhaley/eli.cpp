@@ -11,6 +11,7 @@ Editor::Editor()
     initscr();
     cbreak();
     noecho();
+    m_buffer.cursorY = 0;
 }
 
 Editor::~Editor()
