@@ -12,7 +12,6 @@ struct Cursor {
     unsigned int y = 0;
     unsigned int x = 0;
 };
-
 class Buffer
 {
 public:
@@ -22,7 +21,8 @@ public:
     int getchar() const;
     void update(int ch);
     void display();
-
+    unsigned int cursorY;
+  
 private:
     void initwindows();
     void begofline();
