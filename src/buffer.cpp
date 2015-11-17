@@ -72,7 +72,13 @@ Buffer::update(int ch)
     case KEY_END:
         endofline();
         break;
-    case KEY_BACKSPACE:
+    case KEY_DC:
+	if(m_cur.x != m_lines[m_cur.y].length()){
+	  nextchar();
+	  delchar();
+	}
+	break;
+    case 127:
         delchar();
         break;
     case '\n':
@@ -120,10 +126,8 @@ void
 Buffer::initwindows()
 {
     const int cols = COLS, lines = LINES;
-    if (!m_titlewin) {
-        m_titlewin = newwin(1, cols, lines - 1, 0);
-        wattron(m_titlewin, A_REVERSE);
-    }
+    m_titlewin = newwin(1, cols, lines - 1, 0);
+    wattron(m_titlewin, A_REVERSE);
     if (!m_textwin) {
         m_textwin = newwin(lines - 1, cols, 0, 0);
         keypad(m_textwin, true);
