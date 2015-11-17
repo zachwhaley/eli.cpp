@@ -24,7 +24,7 @@ Move around with the arrow keys.
 
 Type some things, and watch them appear.
 
-Press F1 to save and F12 to quit.
+Press <kbd>Ctrl-w</kbd> to save and F12 to quit.
 
 ## How to Use it
 
