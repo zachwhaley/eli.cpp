@@ -122,7 +122,7 @@ Buffer::display()
 	    //wclear(m_textwin);
 	      waddch(m_textwin, m_lines[line + scrollFactor][col]);
 	  }else{
-	    waddch(m_textwin, '~');
+	    waddch(m_textwin, ' ');
 	  }
         }
     }
