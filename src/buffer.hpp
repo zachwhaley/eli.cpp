@@ -41,6 +41,7 @@ private:
     std::vector<std::string> m_lines;
     WINDOW *m_textwin = nullptr;
     WINDOW *m_titlewin = nullptr;
+    unsigned int cursorY=0;
 };
 
 } // namespace eli
