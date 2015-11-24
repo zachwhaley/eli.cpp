@@ -80,12 +80,11 @@ Buffer::display()
     initwindows();
 
     // Refresh title window
-    wmove(m_title.win, 0, 0);
-    for (size_t col = 0; col < m_title.cols; col++) {
-        waddch(m_title.win, ' ');
-    }
     string title = " " + m_filename + " " + to_string(m_cur.y) + "," + to_string(m_cur.x);
     mvwaddstr(m_title.win, 0, 0, title.c_str());
+    for (size_t col = title.size(); col < m_title.cols + 1; col++) {
+        waddch(m_title.win, ' ');
+    }
     wnoutrefresh(m_title.win);
 
     // Refresh text window
