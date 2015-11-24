@@ -6,30 +6,38 @@ using namespace std;
 
 namespace eli {
 
+Buffer::Buffer()
+{
+    m_lines.push_back(string());
+}
+
 void
 Buffer::read(const char *filename)
 {
     m_filename = filename;
-    m_lines.clear();
 
     ifstream ifs(m_filename, ios::in);
     if (ifs) {
+        m_lines.clear();
         string line;
         while (getline(ifs, line)) {
             m_lines.push_back(line);
         }
     }
-    else {
-        m_lines.push_back(string());
-    }
 }
 
 void
-Buffer::write() const
+Buffer::write()
 {
+    if (m_filename.empty()) {
+        m_filename = getinput("Save as:");
+    }
+
     ofstream ofs(m_filename, ios::out | ios::trunc);
-    for (string line : m_lines) {
-        ofs << line << endl;
+    if (ofs) {
+        for (string line : m_lines) {
+            ofs << line << endl;
+        }
     }
 }
 
@@ -37,6 +45,30 @@ int
 Buffer::getchar() const
 {
     return wgetch(m_text.win);
+}
+
+string
+Buffer::getinput(const string &msg) const
+{
+    // Title message
+    wclear(m_title.win);
+    mvwaddstr(m_title.win, 0, 0, msg.c_str());
+
+    // User input area
+    wattroff(m_title.win, A_REVERSE);
+    waddch(m_title.win, ' ');
+    wrefresh(m_title.win);
+
+    // Get user input
+    echo();
+    char input[256];
+    wgetstr(m_title.win, input);
+    noecho();
+
+    // Make the title window white again
+    wattron(m_title.win, A_REVERSE);
+
+    return string(input);
 }
 
 void
@@ -79,7 +111,12 @@ Buffer::display()
     initwindows();
 
     // Refresh title window
-    string title = " " + m_filename + " " + to_string(m_cur.y) + "," + to_string(m_cur.x);
+    string title = " ";
+    if (m_filename.empty())
+        title += "#No File#";
+    else
+        title += m_filename;
+    title += " " + to_string(m_cur.y) + "," + to_string(m_cur.x);
     mvwaddstr(m_title.win, 0, 0, title.c_str());
     for (size_t col = title.size(); col < m_title.cols; col++) {
         waddch(m_title.win, ' ');

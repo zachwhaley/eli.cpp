@@ -23,9 +23,11 @@ struct Window {
 class Buffer
 {
 public:
+    Buffer();
     void read(const char *filename);
-    void write() const;
+    void write();
     int getchar() const;
+    std::string getinput(const std::string &msg) const;
     void update(int ch);
     void display();
 
