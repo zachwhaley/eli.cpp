@@ -27,8 +27,12 @@ Buffer::read(const char *filename)
 }
 
 void
-Buffer::write() const
+Buffer::write()
 {
+    if (m_filename.empty()) {
+        m_filename = getinput("Save as:");
+    }
+
     ofstream ofs(m_filename, ios::out | ios::trunc);
     if (ofs) {
         for (string line : m_lines) {
@@ -41,6 +45,30 @@ int
 Buffer::getchar() const
 {
     return wgetch(m_text.win);
+}
+
+string
+Buffer::getinput(const string &msg) const
+{
+    // Title message
+    wclear(m_title.win);
+    mvwaddstr(m_title.win, 0, 0, msg.c_str());
+
+    // User input area
+    wattroff(m_title.win, A_REVERSE);
+    waddch(m_title.win, ' ');
+    wrefresh(m_title.win);
+
+    // Get user input
+    echo();
+    char input[256];
+    wgetstr(m_title.win, input);
+    noecho();
+
+    // Make the title window white again
+    wattron(m_title.win, A_REVERSE);
+
+    return string(input);
 }
 
 void
