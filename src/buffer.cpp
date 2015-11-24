@@ -30,8 +30,10 @@ void
 Buffer::write() const
 {
     ofstream ofs(m_filename, ios::out | ios::trunc);
-    for (string line : m_lines) {
-        ofs << line << endl;
+    if (ofs) {
+        for (string line : m_lines) {
+            ofs << line << endl;
+        }
     }
 }
 
