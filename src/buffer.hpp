@@ -8,9 +8,9 @@
 
 namespace eli {
 
-struct Cursor {
-    unsigned int y = 0;
-    unsigned int x = 0;
+struct Position {
+    size_t y = 0;
+    size_t x = 0;
 };
 
 struct Window {
@@ -42,7 +42,8 @@ private:
     void newline();
 
 private:
-    Cursor m_cur;
+    // File position
+    Position m_pos;
     std::string m_filename;
     std::vector<std::string> m_lines;
     Window m_text;

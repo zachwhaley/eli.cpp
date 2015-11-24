@@ -79,7 +79,7 @@ Buffer::display()
     initwindows();
 
     // Refresh title window
-    string title = " " + m_filename + " " + to_string(m_cur.y) + "," + to_string(m_cur.x);
+    string title = " " + m_filename + " " + to_string(m_pos.y) + "," + to_string(m_pos.x);
     mvwaddstr(m_title.win, 0, 0, title.c_str());
     for (size_t col = title.size(); col < m_title.cols; col++) {
         waddch(m_title.win, ' ');
@@ -122,22 +122,22 @@ Buffer::initwindows()
 void
 Buffer::begofline()
 {
-    m_cur.x = 0;
+    m_pos.x = 0;
 }
 
 void
 Buffer::endofline()
 {
-    m_cur.x = m_lines[m_cur.y].length();
+    m_pos.x = m_lines[m_pos.y].length();
 }
 
 void
 Buffer::nextline()
 {
-    if (m_cur.y != m_lines.size() - 1) {
-        m_cur.y++;
+    if (m_pos.y != m_lines.size() - 1) {
+        m_pos.y++;
     }
-    if (m_cur.x > m_lines[m_cur.y].length()) {
+    if (m_pos.x > m_lines[m_pos.y].length()) {
         endofline();
     }
 }
@@ -145,10 +145,10 @@ Buffer::nextline()
 void
 Buffer::prevline()
 {
-    if (m_cur.y != 0) {
-        m_cur.y--;
+    if (m_pos.y != 0) {
+        m_pos.y--;
     }
-    if (m_cur.x > m_lines[m_cur.y].length()) {
+    if (m_pos.x > m_lines[m_pos.y].length()) {
         endofline();
     }
 }
@@ -156,11 +156,11 @@ Buffer::prevline()
 void
 Buffer::nextchar()
 {
-    if (m_cur.x != m_lines[m_cur.y].length()) {
-        m_cur.x++;
+    if (m_pos.x != m_lines[m_pos.y].length()) {
+        m_pos.x++;
     }
-    else if (m_cur.y != m_lines.size() - 1) {
-        m_cur.y++;
+    else if (m_pos.y != m_lines.size() - 1) {
+        m_pos.y++;
         begofline();
     }
 }
@@ -168,11 +168,11 @@ Buffer::nextchar()
 void
 Buffer::prevchar()
 {
-    if (m_cur.x != 0) {
-        m_cur.x--;
+    if (m_pos.x != 0) {
+        m_pos.x--;
     }
-    else if (m_cur.y != 0) {
-        m_cur.y--;
+    else if (m_pos.y != 0) {
+        m_pos.y--;
         endofline();
     }
 }
@@ -180,32 +180,32 @@ Buffer::prevchar()
 void
 Buffer::addchar(char ch)
 {
-    m_lines[m_cur.y].insert(m_cur.x, 1, ch);
+    m_lines[m_pos.y].insert(m_pos.x, 1, ch);
     nextchar();
 }
 
 void
 Buffer::delchar()
 {
-    if (m_cur.x != 0) {
-        m_lines[m_cur.y].erase(m_cur.x - 1, 1);
+    if (m_pos.x != 0) {
+        m_lines[m_pos.y].erase(m_pos.x - 1, 1);
         prevchar();
     }
-    else if (m_cur.y != 0) {
-        string old_line = m_lines[m_cur.y];
-        m_lines.erase(m_lines.begin() + m_cur.y);
+    else if (m_pos.y != 0) {
+        string old_line = m_lines[m_pos.y];
+        m_lines.erase(m_lines.begin() + m_pos.y);
         prevchar();
         // Append what was left of the erased line to the now current line
-        m_lines[m_cur.y] += old_line;
+        m_lines[m_pos.y] += old_line;
     }
 }
 
 void
 Buffer::newline()
 {
-    string new_line = m_lines[m_cur.y].substr(m_cur.x);
-    m_lines[m_cur.y].erase(m_cur.x);
-    auto new_pos = m_lines.begin() + m_cur.y + 1;
+    string new_line = m_lines[m_pos.y].substr(m_pos.x);
+    m_lines[m_pos.y].erase(m_pos.x);
+    auto new_pos = m_lines.begin() + m_pos.y + 1;
     m_lines.insert(new_pos, new_line);
     nextchar();
 }
