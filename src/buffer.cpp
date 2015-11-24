@@ -6,21 +6,23 @@ using namespace std;
 
 namespace eli {
 
+Buffer::Buffer()
+{
+    m_lines.push_back(string());
+}
+
 void
 Buffer::read(const char *filename)
 {
     m_filename = filename;
-    m_lines.clear();
 
     ifstream ifs(m_filename, ios::in);
     if (ifs) {
+        m_lines.clear();
         string line;
         while (getline(ifs, line)) {
             m_lines.push_back(line);
         }
-    }
-    else {
-        m_lines.push_back(string());
     }
 }
 

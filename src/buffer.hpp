@@ -23,6 +23,7 @@ struct Window {
 class Buffer
 {
 public:
+    Buffer();
     void read(const char *filename);
     void write() const;
     int getchar() const;
