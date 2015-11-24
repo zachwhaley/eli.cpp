@@ -9,6 +9,8 @@
 namespace eli {
 
 struct Position {
+    size_t top = 0;
+    size_t bot = 0;
     size_t y = 0;
     size_t x = 0;
 };
