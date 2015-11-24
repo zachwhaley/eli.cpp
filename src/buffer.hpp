@@ -13,10 +13,16 @@ struct Cursor {
     unsigned int x = 0;
 };
 
+struct Window {
+    WINDOW *win = nullptr;
+    size_t lines = 0;
+    size_t cols = 0;
+    ~Window() { if (win) delwin(win); }
+};
+
 class Buffer
 {
 public:
-    ~Buffer();
     void read(const char *filename);
     void write() const;
     int getchar() const;
@@ -39,8 +45,8 @@ private:
     Cursor m_cur;
     std::string m_filename;
     std::vector<std::string> m_lines;
-    WINDOW *m_textwin = nullptr;
-    WINDOW *m_titlewin = nullptr;
+    Window m_text;
+    Window m_title;
 };
 
 } // namespace eli

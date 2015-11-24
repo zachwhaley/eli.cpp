@@ -7,16 +7,6 @@ using namespace std;
 
 namespace eli {
 
-Buffer::~Buffer()
-{
-    if (m_textwin) {
-        delwin(m_textwin);
-    }
-    if (m_titlewin) {
-        delwin(m_titlewin);
-    }
-}
-
 void
 Buffer::read(const char *filename)
 {
@@ -47,7 +37,7 @@ Buffer::write() const
 int
 Buffer::getchar() const
 {
-    return wgetch(m_textwin);
+    return wgetch(m_text.win);
 }
 
 void
@@ -88,46 +78,48 @@ void
 Buffer::display()
 {
     initwindows();
-    const size_t cols = COLS, lines = LINES;
 
     // Refresh title window
-    wmove(m_titlewin, 0, 0);
-    for (size_t col = 0; col < cols; col++) {
-        waddch(m_titlewin, ' ');
+    wmove(m_title.win, 0, 0);
+    for (size_t col = 0; col < m_title.cols; col++) {
+        waddch(m_title.win, ' ');
     }
     stringstream ss;
     ss << " " << m_filename << " " << m_cur.y << "," << m_cur.x;
     string title = ss.str();
-    mvwaddstr(m_titlewin, 0, 0, title.c_str());
-    wnoutrefresh(m_titlewin);
+    mvwaddstr(m_title.win, 0, 0, title.c_str());
+    wnoutrefresh(m_title.win);
 
     // Refresh text window
-    for (size_t line = 0; line < lines - 1; line++) {
-        wmove(m_textwin, line, 0);
-        for (size_t col = 0; col < cols; col++) {
+    for (size_t line = 0; line < m_text.lines - 1; line++) {
+        wmove(m_text.win, line, 0);
+        for (size_t col = 0; col < m_text.cols; col++) {
             if (line < m_lines.size() && col < m_lines[line].length())
-                waddch(m_textwin, m_lines[line][col]);
+                waddch(m_text.win, m_lines[line][col]);
             else
-                waddch(m_textwin, ' ');
+                waddch(m_text.win, ' ');
         }
     }
-    wnoutrefresh(m_textwin);
-    wmove(m_textwin, m_cur.y, m_cur.x);
+    wnoutrefresh(m_text.win);
+    wmove(m_text.win, m_cur.y, m_cur.x);
     doupdate();
 }
 
 void
 Buffer::initwindows()
 {
-    const int cols = COLS, lines = LINES;
-    if (!m_titlewin) {
-        m_titlewin = newwin(1, cols, lines - 1, 0);
-        wattron(m_titlewin, A_REVERSE);
+    const size_t cols = COLS, lines = LINES;
+    if (!m_title.win) {
+        m_title.win = newwin(1, cols, lines - 1, 0);
+        m_title.lines = 1;
+        m_title.cols = cols;
+        wattron(m_title.win, A_REVERSE);
     }
-    if (!m_textwin) {
-        m_textwin = newwin(lines - 1, cols, 0, 0);
-        keypad(m_textwin, true);
-        scrollok(m_textwin, false);
+    if (!m_text.win) {
+        m_text.win = newwin(lines - 1, cols, 0, 0);
+        m_text.lines = lines - 1;
+        m_text.cols = cols;
+        keypad(m_text.win, true);
     }
 }
 
