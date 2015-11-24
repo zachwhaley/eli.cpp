@@ -84,9 +84,7 @@ Buffer::display()
     for (size_t col = 0; col < m_title.cols; col++) {
         waddch(m_title.win, ' ');
     }
-    stringstream ss;
-    ss << " " << m_filename << " " << m_cur.y << "," << m_cur.x;
-    string title = ss.str();
+    string title = " " + m_filename + " " + to_string(m_cur.y) + "," + to_string(m_cur.x);
     mvwaddstr(m_title.win, 0, 0, title.c_str());
     wnoutrefresh(m_title.win);
 
