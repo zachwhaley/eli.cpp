@@ -83,7 +83,12 @@ Buffer::display()
     initwindows();
 
     // Refresh title window
-    string title = " " + m_filename + " " + to_string(m_cur.y) + "," + to_string(m_cur.x);
+    string title = " ";
+    if (m_filename.empty())
+        title += "#No File#";
+    else
+        title += m_filename;
+    title += " " + to_string(m_cur.y) + "," + to_string(m_cur.x);
     mvwaddstr(m_title.win, 0, 0, title.c_str());
     for (size_t col = title.size(); col < m_title.cols; col++) {
         waddch(m_title.win, ' ');
