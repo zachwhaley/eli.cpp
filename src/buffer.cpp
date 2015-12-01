@@ -116,7 +116,8 @@ Buffer::display()
         title += "#No File#";
     else
         title += m_filename;
-    title += " " + to_string(m_cur.y) + "," + to_string(m_cur.x);
+    title += " " + to_string(m_pos.y) + "," + to_string(m_pos.x);
+    wclear(m_title.win);
     mvwaddstr(m_title.win, 0, 0, title.c_str());
     for (size_t col = title.size(); col < m_title.cols; col++) {
         waddch(m_title.win, ' ');
@@ -124,17 +125,21 @@ Buffer::display()
     wnoutrefresh(m_title.win);
 
     // Refresh text window
-    for (size_t line = 0; line < m_text.lines - 1; line++) {
-        wmove(m_text.win, line, 0);
+    for (size_t wline = 0, fline = m_pos.top; wline < m_text.lines; wline++, fline++) {
+        wmove(m_text.win, wline, 0);
         for (size_t col = 0; col < m_text.cols; col++) {
-            if (line < m_lines.size() && col < m_lines[line].length())
-                waddch(m_text.win, m_lines[line][col]);
+            if (fline < m_lines.size() && col < m_lines[fline].length())
+                waddch(m_text.win, m_lines[fline][col]);
             else
                 waddch(m_text.win, ' ');
         }
     }
     wnoutrefresh(m_text.win);
-    wmove(m_text.win, m_cur.y, m_cur.x);
+
+    // Set cursor position
+    int cur_y = m_pos.y - m_pos.top;
+    int cur_x = m_pos.x;
+    wmove(m_text.win, cur_y, cur_x);
     doupdate();
 }
 
@@ -153,28 +158,38 @@ Buffer::initwindows()
         m_text.lines = lines - 1;
         m_text.cols = cols;
         keypad(m_text.win, true);
+
+        // Initialize file position bottom
+        if (m_text.lines >= m_lines.size())
+            m_pos.bot = m_lines.size() - 1;
+        else
+            m_pos.bot = m_text.lines - 1;
     }
 }
 
 void
 Buffer::begofline()
 {
-    m_cur.x = 0;
+    m_pos.x = 0;
 }
 
 void
 Buffer::endofline()
 {
-    m_cur.x = m_lines[m_cur.y].length();
+    m_pos.x = m_lines[m_pos.y].length();
 }
 
 void
 Buffer::nextline()
 {
-    if (m_cur.y != m_lines.size() - 1) {
-        m_cur.y++;
+    if (m_pos.y != m_lines.size() - 1) {
+        m_pos.y++;
+        if (m_pos.y > m_pos.bot) {
+            m_pos.top++;
+            m_pos.bot++;
+        }
     }
-    if (m_cur.x > m_lines[m_cur.y].length()) {
+    if (m_pos.x > m_lines[m_pos.y].length()) {
         endofline();
     }
 }
@@ -182,10 +197,14 @@ Buffer::nextline()
 void
 Buffer::prevline()
 {
-    if (m_cur.y != 0) {
-        m_cur.y--;
+    if (m_pos.y != 0) {
+        m_pos.y--;
+        if (m_pos.y < m_pos.top) {
+            m_pos.top--;
+            m_pos.bot--;
+        }
     }
-    if (m_cur.x > m_lines[m_cur.y].length()) {
+    if (m_pos.x > m_lines[m_pos.y].length()) {
         endofline();
     }
 }
@@ -193,11 +212,15 @@ Buffer::prevline()
 void
 Buffer::nextchar()
 {
-    if (m_cur.x != m_lines[m_cur.y].length()) {
-        m_cur.x++;
+    if (m_pos.x != m_lines[m_pos.y].length()) {
+        m_pos.x++;
     }
-    else if (m_cur.y != m_lines.size() - 1) {
-        m_cur.y++;
+    else if (m_pos.y != m_lines.size() - 1) {
+        m_pos.y++;
+        if (m_pos.y > m_pos.bot) {
+            m_pos.top++;
+            m_pos.bot++;
+        }
         begofline();
     }
 }
@@ -205,11 +228,15 @@ Buffer::nextchar()
 void
 Buffer::prevchar()
 {
-    if (m_cur.x != 0) {
-        m_cur.x--;
+    if (m_pos.x != 0) {
+        m_pos.x--;
     }
-    else if (m_cur.y != 0) {
-        m_cur.y--;
+    else if (m_pos.y != 0) {
+        m_pos.y--;
+        if (m_pos.y < m_pos.top) {
+            m_pos.top--;
+            m_pos.bot--;
+        }
         endofline();
     }
 }
@@ -217,32 +244,32 @@ Buffer::prevchar()
 void
 Buffer::addchar(char ch)
 {
-    m_lines[m_cur.y].insert(m_cur.x, 1, ch);
+    m_lines[m_pos.y].insert(m_pos.x, 1, ch);
     nextchar();
 }
 
 void
 Buffer::delchar()
 {
-    if (m_cur.x != 0) {
-        m_lines[m_cur.y].erase(m_cur.x - 1, 1);
+    if (m_pos.x != 0) {
+        m_lines[m_pos.y].erase(m_pos.x - 1, 1);
         prevchar();
     }
-    else if (m_cur.y != 0) {
-        string old_line = m_lines[m_cur.y];
-        m_lines.erase(m_lines.begin() + m_cur.y);
+    else if (m_pos.y != 0) {
+        string old_line = m_lines[m_pos.y];
+        m_lines.erase(m_lines.begin() + m_pos.y);
         prevchar();
         // Append what was left of the erased line to the now current line
-        m_lines[m_cur.y] += old_line;
+        m_lines[m_pos.y] += old_line;
     }
 }
 
 void
 Buffer::newline()
 {
-    string new_line = m_lines[m_cur.y].substr(m_cur.x);
-    m_lines[m_cur.y].erase(m_cur.x);
-    auto new_pos = m_lines.begin() + m_cur.y + 1;
+    string new_line = m_lines[m_pos.y].substr(m_pos.x);
+    m_lines[m_pos.y].erase(m_pos.x);
+    auto new_pos = m_lines.begin() + m_pos.y + 1;
     m_lines.insert(new_pos, new_line);
     nextchar();
 }
