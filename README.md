@@ -2,6 +2,8 @@
 
 A bare bones text editor written in C++
 
+Check out [eli.c](https://github.com/zachwhaley/eli.c).  It's the same thing written in C
+
 ## Libraries
 
 [ncurses](https://www.gnu.org/software/ncurses/ncurses.html)
