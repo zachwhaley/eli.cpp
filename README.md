@@ -1,8 +1,8 @@
+# **_I'm no longer working on this project, because I rewrote eli in [C](https://github.com/zachwhaley/eli) :)_**
+
 # eli (short for Eliana)
 
 A bare bones text editor written in C++
-
-Check out [eli.c](https://github.com/zachwhaley/eli.c).  It's the same thing written in C
 
 ## Libraries
 
